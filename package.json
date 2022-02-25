@@ -1,0 +1,57 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "axios": "^0.21",
+    "bootstrap": "^4.6.1",
+    "jquery": "^3.6",
+    "laravel-mix": "^6.0.6",
+    "lodash": "^4.17.19",
+    "popper.js": "^1.16.1",
+    "postcss": "^8.1.14",
+    "resolve-url-loader": "^3.1.2",
+    "sass": "^1.32.11",
+    "sass-loader": "^11.0.1",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "dependencies": {
+    "bootstrap-vue": "^2.21.2",
+    "moment": "^2.29.1",
+    "v-mask": "^2.3.0",
+    "v-select2-component": "^0.4.7",
+    "vue-quill-editor": "^3.0.6",
+    "vue-snotify": "^3.2.1",
+    "vue-spinner": "^1.0.4",
+    "vue-table-to-excel": "^1.0.6",
+    "vue-the-mask": "^0.11.1",
+    "vuex": "^3.6.2"
+  },
+  "name": "covid-19",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\"></a></p>",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://frankley.admin@bitbucket.org/frankley/covid-19.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/frankley/covid-19/issues"
+  },
+  "homepage": "https://bitbucket.org/frankley/covid-19#readme"
+}
