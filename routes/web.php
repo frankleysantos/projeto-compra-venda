@@ -18,7 +18,8 @@ Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'
 Route::group(['prefix' => 'oferta', 'middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\OfertaController::class, 'index']);
     Route::post('store', [App\Http\Controllers\OfertaController::class, 'store']);
-    Route::get('show', [App\Http\Controllers\OfertaController::class, 'show']);
+    Route::get('show/{porPage?}', [App\Http\Controllers\OfertaController::class, 'show']);
+    Route::get('show/negociacao/{oferta_id}', [App\Http\Controllers\OfertaController::class, 'negociacao']);
 });
 
 Route::group(['prefix' => 'produto', 'middleware' => 'auth'], function(){

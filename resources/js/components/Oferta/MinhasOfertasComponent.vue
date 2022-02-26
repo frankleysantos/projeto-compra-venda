@@ -60,7 +60,7 @@
 
       
       <!-- Modal -->
-        <b-modal ref="modal-oferta-produtos"  title="Produtos Cadastrados na orferta" hide-footer>
+        <b-modal ref="modal-oferta-produtos"  title="Produtos Cadastrados na orferta" hide-footer size="xl">
             <oferta-produtos-component :ofertaProdutos="ofertaProdutos"></oferta-produtos-component>
         </b-modal>
       
@@ -93,11 +93,14 @@ export default {
                     sortable: true
                 },
             ],
+            paginacao: {
+                perPage: null,
+            }
         }
     },
     methods: {
         consultaMinhasOfertas: function() {
-            return this.$store.dispatch('minhasOfertas')
+            return this.$store.dispatch('minhasOfertas', this.paginacao)
                             .then((e) => {
                                 this.minhasOfertas = this.$store.state.oferta.ofertas;
                             })

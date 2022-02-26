@@ -54,9 +54,10 @@
         /* background: #3B1E6A */
         /* background-image: linear-gradient(to right top, #aec9f2, #a5c4ec, #9dbee5, #94b9df, #8cb4d8); */
         background-image: url("assets/img/unidos.jpg");
-        padding-right: 700px;
-        background-size: cover;
-        height: auto;
+        padding-right: 850px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        /* height: 800px; */
     }
     input {
         width: 100% !important;

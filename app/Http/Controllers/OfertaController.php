@@ -66,10 +66,21 @@ class OfertaController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show()
+  public function show($porPage = null)
   {
-      $minhasOfertas = DB::table('ofertas')->get();
+      $minhasOfertas = DB::table('ofertas');
+      if($porPage > 0){
+        $minhasOfertas = $minhasOfertas->paginate($porPage);
+      }else{
+        $minhasOfertas = $minhasOfertas->get();
+      }
+      
       return response()->json($minhasOfertas);
+  }
+
+  public function negociacao($oferta_id)
+  {
+    return view('oferta.negociacao.index', compact('oferta_id'));
   }
 
   /**

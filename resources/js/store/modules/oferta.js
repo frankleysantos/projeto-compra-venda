@@ -37,8 +37,8 @@ export default {
         //     return Axios.get('paciente/edit/'+id)
         //                 .then(response => context.commit('GET_PACIENTE',response.data));
         // },
-        minhasOfertas(context){
-            return Axios.get('oferta/show/')
+        minhasOfertas(context, parametro){
+            return Axios.get('oferta/show/'+parametro.perPage+'?page='+parametro.currentPage)
                         .then(response=> context.commit('SHOW_OFERTAS', response.data))
         },
         showAgendamentosPet(context, parametro){

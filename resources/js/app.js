@@ -37,6 +37,8 @@ Vue.component('minhas-ofertas-component', require('./components/Oferta/MinhasOfe
 
 //produtos
 Vue.component('oferta-produtos-component', require('./components/Produto/ProdutoComponent.vue').default);
+Vue.component('negociacao-produtos-component', require('./components/Produto/Negociacao/NegociacaoComponent.vue').default);
+
 
 const app = new Vue({
     store,
