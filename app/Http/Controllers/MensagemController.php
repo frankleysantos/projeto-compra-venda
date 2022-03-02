@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class MensagemController extends Controller 
 {
 
@@ -34,7 +34,13 @@ class MensagemController extends Controller
    */
   public function store(Request $request)
   {
-    
+      DB::table('mensagens')->insert([
+          'oferta_user_id'  => $request->oferta_user_id,
+          'oferta_id'       => $request->oferta_id,
+          'descricao'        => $request->descricao
+      ]);
+      
+      return response()->json($request->all());
   }
 
   /**
@@ -43,9 +49,10 @@ class MensagemController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show($id)
+  public function show(Request $request)
   {
-    
+     $mensagens = DB::table('mensagens')->where('oferta_id', $request->oferta_id)->get();
+     return response()->json($mensagens);
   }
 
   /**

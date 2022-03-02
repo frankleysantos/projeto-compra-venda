@@ -29,6 +29,12 @@ Route::group(['prefix' => 'produto', 'middleware' => 'auth'], function(){
     Route::get('show/oferta/{oferta_id}', [App\Http\Controllers\ProdutoController::class, 'ofertaProduto']);
 });
 
+Route::group(['prefix' => 'mensagem', 'middleware' => 'auth'], function(){
+    Route::get('/', [App\Http\Controllers\MensagemController::class, 'index']);
+    Route::post('store', [App\Http\Controllers\MensagemController::class, 'store']);
+    Route::post('show', [App\Http\Controllers\MensagemController::class, 'show']);
+});
+
 Route::group(['prefix' => 'categoria', 'middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\ClienteController::class, 'index']);
     Route::post('store', [App\Http\Controllers\ClienteController::class, 'store']);

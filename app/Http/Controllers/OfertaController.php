@@ -72,7 +72,7 @@ class OfertaController extends Controller
       if($porPage > 0){
         $minhasOfertas = $minhasOfertas->paginate($porPage);
       }else{
-        $minhasOfertas = $minhasOfertas->get();
+        $minhasOfertas = $minhasOfertas->where('user_id', Auth::user()->id)->get();
       }
       
       return response()->json($minhasOfertas);
@@ -80,7 +80,8 @@ class OfertaController extends Controller
 
   public function negociacao($oferta_id)
   {
-    return view('oferta.negociacao.index', compact('oferta_id'));
+    $user_logado = Auth::user()->id;
+    return view('oferta.negociacao.index', compact('oferta_id', 'user_logado'));
   }
 
   /**
