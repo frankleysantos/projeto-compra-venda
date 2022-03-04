@@ -9,8 +9,8 @@ class CreateMensagensTable extends Migration {
 	{
 		Schema::create('mensagens', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('user_id')->unsigned()->nullable(); //quem vende
-			$table->integer('oferta_user_id')->unsigned(); //quem vende
+			$table->integer('recebe_user_id')->unsigned()->nullable(); //quem vende
+			$table->integer('envia_user_id')->unsigned(); //quem vende
 			$table->integer('oferta_id')->unsigned();
 			$table->decimal('valor_oferta', 10,2)->nullable();
 			$table->text('descricao')->nullable();

@@ -3,37 +3,48 @@
         quem criou a oferta_id Oferta -> user_id
         quem faz a oferta -> Auth::user()->id -->
     <div>
-        negociação: {{oferta_id}} - {{user_logado}}
-        <div class="row">
-            <div class="col-md">
-                
+
+        <div class="row form-group">
+            <div class="col-md" v-for="item in filtro.mensagens" :key="item.envia_user_id">   
+                <div  v-if="item.envia_user_id ==  filtro.vendedor.user_id">
+                    <div class="d-none">{{status =1}}</div>
+                    <b-button v-b-toggle.sidebar-1 variant="info" @click="mensagemOferta(item.envia_user_id)">Mensagem</b-button>
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md d-flex justify-content-end">
-                <b-button v-b-toggle.sidebar-1 variant="info">Mensagem</b-button>
+        <div class="row form-group" v-for="item in filtro.mensagens" :key="item.envia_user_id">
+            <div class="col-md"  v-if="status == 0">   
+                Para conversar com o Comprador {{item.envia_user_id}} clique aqui
+                <b-button v-b-toggle.sidebar-1 variant="info" @click="mensagemOferta(item.envia_user_id)">Mensagem</b-button>
             </div>
+            <div class="w-100"></div>
         </div>
+
 
 
         <!-- sidebar de chat -->
-        <b-sidebar id="sidebar-1" title="Meu Chat" shadow>
-            <div class="px-3 py-2">
-                <div class="row form-group" v-for="mensagem in painel.mensagem" :key="mensagem.id">
-                    <div class="col-md" :align="user_logado == mensagem.oferta_user_id ? 'right' : 'left'">
+        <b-sidebar id="sidebar-1" title="Meu Chat" shadow class="sidebar-message">
+            <div class="px-3 row form-group chat" ref="tela">
+                <div class="col-md-12" v-for="mensagem in painel.mensagem">
+                    <p  :class="user_logado == mensagem.envia_user_id ? 'comprador' : ''">
                         {{mensagem.descricao}}
-                    </div>
+                        <small class="form-text text-muted">{{mensagem.username}}</small>
+                    </p>
                 </div>
-                <b-form-textarea
-                    id="textarea"
-                    v-model="mensagem.descricao"
-                    placeholder="Envie sua mensagem"
-                    rows="3"
-                    max-rows="6"
-                    @keypress.enter="enviarmensagem"
-                    >
-                </b-form-textarea>
+            </div>
+            <div class="row form-group">
+                <div class="col-md">
+                    <b-form-textarea
+                        id="textarea"
+                        v-model="mensagem.descricao"
+                        placeholder="Envie sua mensagem"
+                        rows="3"
+                        max-rows="6"
+                        @keypress.enter="enviarmensagem"
+                        >
+                    </b-form-textarea>
+                </div>
             </div>
         </b-sidebar>
     </div>
@@ -41,40 +52,92 @@
 <script>
 export default {
     created() {
-        this.mensagem.oferta_user_id = this.user_logado;
+        this.mensagem.user_logado = this.user_logado;
         this.mensagem.oferta_id = this.oferta_id;
+        this.filtroMensagens();
         this.mensagemOferta();
+        setInterval(() => {
+                this.barraRolagem()
+        }, 2000);  
+        
     },
     data() {
         return {
+            status: 0,
+            filtro: [],
             painel: {
                 mensagem: null
             },
             mensagem: {
+                user_logado: null,
+                recebe_user_id: null,
                 oferta_id: null,
-                oferta_user_id: null,
-                descricao: null
+                envia_user_id: null,
+                descricao: null,
+                username:null
             }
         }
     },
     methods: {
+        filtroMensagens: function () {
+            return this.$store.dispatch('filtroMensagens', this.mensagem)
+                        .then(() => {
+                            this.filtro = this.$store.state.mensagem.filtro;
+                        })
+        },
+
         enviarmensagem: function() {
             this.$store.dispatch('enviandoMensagem', this.mensagem)
                         .then(() => {
-                            console.log(this.$store.state.mensagem.mensagens);
                             this.mensagem.descricao = null
                         })
+                        .finally(() => {
+                            setTimeout(() => {
+                                    this.barraRolagem()
+                            }, 2000);                           
+                        })
         },
-        mensagemOferta: function () {
+        mensagemOferta: function (user_oferta) {
+            this.mensagem.envia_user_id = user_oferta;
             return this.$store.dispatch('mostrandoMensagem', this.mensagem)
                         .then(() => {
                             this.painel.mensagem = this.$store.state.mensagem.mensagens;
                         })
+                        .finally(() => {
+                            setTimeout(() => {
+                                    this.barraRolagem()
+                            }, 2000);                           
+                        })
+        },
+        barraRolagem: function () {
+            this.$refs.tela.scrollTo({
+                top: this.$refs.tela.scrollHeight,
+                let: 0,
+                behavior: 'smooth'
+            });
         }
     },
-    props: ['oferta_id', 'user_logado']
+    props: ['oferta_id', 'user_logado'],
 }
 </script>
-<style lang="">
-    
+<style scoped>
+    .chat{
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 400px;
+        /* max-height: 400px; */
+    }
+    .comprador{
+        text-align: right;
+    }
+    .vendedor {
+        background-color: rgb(141, 223, 202);
+        text-align: left;
+        color: #fff;
+        padding: 5px 5px 5px 5px;
+        border-radius: 10px;
+    }
+    /* .sidebar-message {
+        
+    } */
 </style>

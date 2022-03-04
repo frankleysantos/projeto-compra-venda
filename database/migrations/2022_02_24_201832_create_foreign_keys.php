@@ -33,12 +33,19 @@ class CreateForeignKeys extends Migration {
 						->onDelete('no action')
 						->onUpdate('no action');
 		});
-	
+
 		Schema::table('mensagens', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('oferta_produtos')
+			$table->foreign('envia_user_id')->references('id')->on('users')
 						->onDelete('no action')
 						->onUpdate('no action');
 		});
+
+		Schema::table('mensagens', function(Blueprint $table) {
+			$table->foreign('recebe_user_id')->references('id')->on('users')
+						->onDelete('no action')
+						->onUpdate('no action');
+		});
+
 		Schema::table('mensagens', function(Blueprint $table) {
 			$table->foreign('oferta_id')->references('id')->on('ofertas')
 						->onDelete('cascade')
@@ -64,7 +71,10 @@ class CreateForeignKeys extends Migration {
 			$table->dropForeign('ofertas_user_id_foreign');
 		});
 		Schema::table('mensagens', function(Blueprint $table) {
-			$table->dropForeign('mensagens_user_id_foreign');
+			$table->dropForeign('mensagens_envia_user_id_foreign');
+		});
+		Schema::table('mensagens', function(Blueprint $table) {
+			$table->dropForeign('mensagens_recebe_user_id_foreign');
 		});
 		Schema::table('mensagens', function(Blueprint $table) {
 			$table->dropForeign('mensagens_oferta_id_foreign');

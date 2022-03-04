@@ -33,6 +33,7 @@ Route::group(['prefix' => 'mensagem', 'middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\MensagemController::class, 'index']);
     Route::post('store', [App\Http\Controllers\MensagemController::class, 'store']);
     Route::post('show', [App\Http\Controllers\MensagemController::class, 'show']);
+    Route::post('show/filtro', [App\Http\Controllers\MensagemController::class, 'showMessagens']);
 });
 
 Route::group(['prefix' => 'categoria', 'middleware' => 'auth'], function(){
