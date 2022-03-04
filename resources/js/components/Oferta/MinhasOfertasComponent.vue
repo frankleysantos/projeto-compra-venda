@@ -61,7 +61,7 @@
       
       <!-- Modal -->
         <b-modal ref="modal-oferta-produtos"  title="Produtos Cadastrados na orferta" hide-footer size="xl">
-            <oferta-produtos-component :ofertaProdutos="ofertaProdutos"></oferta-produtos-component>
+            <oferta-produtos-component :propsOfertaProdutos="ofertaProdutos"></oferta-produtos-component>
         </b-modal>
       
     </div>

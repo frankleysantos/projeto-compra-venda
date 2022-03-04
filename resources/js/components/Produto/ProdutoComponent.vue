@@ -6,7 +6,7 @@
 <script>
 export default {
     created() {
-        this.ofertaProdutos.produtos = this.ofertaProdutos;
+        this.ofertaProdutos.produtos = this.propsOfertaProdutos;
     },
     data() {
         return {
@@ -32,7 +32,7 @@ export default {
             ],
         }
     },
-    props: ['ofertaProdutos']
+    props: ['propsOfertaProdutos']
 }
 </script>
 <style lang="">

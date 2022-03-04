@@ -41,14 +41,6 @@ export default {
             return Axios.get('oferta/show/'+parametro.perPage+'?page='+parametro.currentPage)
                         .then(response=> context.commit('SHOW_OFERTAS', response.data))
         },
-        showAgendamentosPet(context, parametro){
-            return Axios.get('agenda/pet/'+parametro)
-                        .then(response=> context.commit('SHOW_AGENDADOS', response.data))
-        },
-        alterarStatusAgenda(context, parametros){
-            return Axios.post('agenda/update/status', parametros)
-                        .then(response => context.commit('UPDATE_AGENDADO', response.data))
-        },
         // deletePaciente(context,id, state){
         //     return Axios.get('paciente/delete/'+id)
         //                 .then(() => context.commit('DEL_PACIENTE', id));

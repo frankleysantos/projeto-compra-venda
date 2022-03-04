@@ -14,12 +14,12 @@ export default {
 
     actions:{
         showProdutos(context, parametro){
-            return Axios.get('produto/show/'+parametro)
+            return Axios.get('/vibbra/public/produto/show/'+parametro)
                         .then(response=> context.commit('SHOW_PRODUTOS', response.data))
         },
 
         showOfertaProdutos(context, parametro){
-            return Axios.get("produto/show/oferta/"+parametro)
+            return Axios.get("/vibbra/public/produto/show/oferta/"+parametro)
                         .then(response=> context.commit('SHOW_PRODUTOS', response.data))
         },
 

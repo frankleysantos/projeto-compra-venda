@@ -83,15 +83,16 @@ class MensagemController extends Controller
    */
   public function show(Request $request)
   {
-    // $oferta_id = $request->oferta_id;
 
     $mensagens = DB::table('mensagens as msn')
                     ->join('users as u', 'u.id', 'msn.envia_user_id')
                     ->where('oferta_id', $request->oferta_id)
                     ->where('envia_user_id', $request->envia_user_id)
+                    ->where('recebe_user_id', Auth::user()->id)
                     // ->orwhere('recebe_user_id', $request->envia_user_id)
                     ->orwhere(function($query) use ($request) {
-                      $query->where('recebe_user_id', $request->envia_user_id)
+                      $query->where('oferta_id', $request->oferta_id)
+                            ->where('recebe_user_id', $request->envia_user_id)
                             ->where('envia_user_id', Auth::user()->id);
                     })
                     ->orderBy('msn.id')

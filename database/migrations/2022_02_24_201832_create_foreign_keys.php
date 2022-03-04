@@ -15,17 +15,17 @@ class CreateForeignKeys extends Migration {
 		});
 		Schema::table('oferta_produtos', function(Blueprint $table) {
 			$table->foreign('oferta_id')->references('id')->on('ofertas')
-						->onDelete('cascade')
+						->onDelete('no action')
 						->onUpdate('no action');
 		});
 		Schema::table('oferta_produtos', function(Blueprint $table) {
 			$table->foreign('produto_id')->references('id')->on('produtos')
-						->onDelete('cascade')
+						->onDelete('no action')
 						->onUpdate('no action');
 		});
 		Schema::table('fotos', function(Blueprint $table) {
 			$table->foreign('produto_id')->references('id')->on('oferta_produtos')
-						->onDelete('cascade')
+						->onDelete('no action')
 						->onUpdate('no action');
 		});
 		Schema::table('ofertas', function(Blueprint $table) {
@@ -48,7 +48,7 @@ class CreateForeignKeys extends Migration {
 
 		Schema::table('mensagens', function(Blueprint $table) {
 			$table->foreign('oferta_id')->references('id')->on('ofertas')
-						->onDelete('cascade')
+						->onDelete('no action')
 						->onUpdate('no action');
 		});
 	}
